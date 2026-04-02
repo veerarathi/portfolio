@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veera Rathi | Full Stack Developer</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f9f9f9;
+      --card-bg:#ffffff;
+      --text:#111;
+      --accent:#42a5f5;
+      --accent-2:#7c4dff;
+    }
+    [data-theme="dark"]{
+      --bg:#0f0f0f;
+      --card-bg:#1a1a1a;
+      --text:#f1f1f1;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);}
+    .container{width:min(90%,1200px);margin:auto;}
+
+    nav{
+      position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);
+      display:flex;gap:2rem;background:var(--card-bg);
+      padding:0.6rem 1.5rem;border-radius:3rem;
+      box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    }
+    nav a{color:var(--text);text-decoration:none;font-weight:600;}
+
+    header{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    }
+    .hero-content h1{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(2.5rem,8vw,4.5rem);
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      -webkit-background-clip:text;color:transparent;
+    }
+
+    .btn{
+      padding:0.6rem 1.4rem;border-radius:2rem;border:none;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff;cursor:pointer;
+      transition:0.3s;
+    }
+    .btn:hover{transform:translateY(-3px);}
+
+    section{padding:5rem 0;}
+
+    .grid{
+      display:grid;
+      gap:2rem;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+
+    .info-card, .project-card{
+      background:var(--card-bg);
+      padding:2rem;
+      border-radius:1rem;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+      transition:0.3s;
+    }
+    .project-card:hover{transform:translateY(-5px);}
+
+    .project-tags{
+      margin-top:10px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .tag{
+      background:var(--accent-2);
+      color:#fff;
+      padding:4px 10px;
+      border-radius:20px;
+      font-size:12px;
+    }
+
+    footer{text-align:center;padding:2rem;}
+  </style>
+</head>
+
+<body>
+
+<button id="themeToggle">☀️</button>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+</nav>
+
+<header>
+  <div class="hero-content">
+    <h1 id="typewriter"></h1>
+    <p>Building scalable web applications and intelligent systems </p>
+    <a href="#projects" class="btn">View My Work</a>
+  </div>
+</header>
+
+
+<section id="about" class="container">
+  <h2>About Me</h2>
+  <div class="grid">
+    <div class="info-card">
+      <h3>Who I Am</h3>
+      <p>I'm Veera Rathi, a passionate Full Stack Developer focused on building efficient and scalable applications.</p>
+    </div>
+    <div class="info-card">
+      <h3>What I Do</h3>
+      <p>I develop end-to-end web solutions, combining backend systems, APIs, and modern frontend frameworks.</p>
+    </div>
+    <div class="info-card">
+      <h3>Tech Stack</h3>
+      <p>JavaScript · React · Node.js · Python · Flask · MongoDB · MySQL · Git · Docker</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="projects" class="container">
+  <h2>Projects</h2>
+  <div class="grid">
+
+    <div class="project-card">
+      <h3>Rice Leaf Disease Classifier</h3>
+      <p>Full stack app to manage daily tasks with authentication.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Tensorflow</span>
+      </div>
+      <br>
+      <a href="#" class="btn">Live Demo</a>
+    </div>
+
+    <div class="project-card">
+      <h3>Portfolio Website</h3>
+      <p>Responsive personal portfolio showcasing projects.</p>
+      <div class="project-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+      </div>
+      <br>
+      <a href="#" class="btn">Live Demo</a>
+    </div>
+
+    <div class="project-card">
+      <h3>API Based Weather App</h3>
+      <p>Real-time weather data using API integration.</p>
+      <div class="project-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">API</span>
+      </div>
+      <br>
+      <a href="#" class="btn">Live Demo</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© <span id="year"></span> Veera Rathi</p>
+</footer>
+
+<script>
+const root=document.documentElement;
+const btn=document.getElementById('themeToggle');
+btn.onclick=()=>{
+  const t=root.getAttribute('data-theme')==='dark'?'light':'dark';
+  root.setAttribute('data-theme',t);
+};
+
+const phrases=["Hi, I'm Veera ","Full Stack Developer","Software Engineer"];
+let i=0,j=0,cur=[];
+const el=document.getElementById('typewriter');
+
+function loop(){
+  el.innerHTML=cur.join('');
+  if(i<phrases.length){
+    if(j<phrases[i].length){
+      cur.push(phrases[i][j]);j++;
+    }else{
+      i++;j=0;cur=[];
+      setTimeout(loop,1200);return;
+    }
+  }else i=0;
+  setTimeout(loop,80);
+}
+loop();
+
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+
+</body>
+</html>
